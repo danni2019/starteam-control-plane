@@ -22,6 +22,10 @@ type Paths struct {
 	LaunchAgent     string
 }
 
+func (p Paths) StarPulseStaging() string {
+	return filepath.Join(p.ApplicationData, "starpulse", "staging")
+}
+
 func ForRuntimeRoot(root string) Paths {
 	return Paths{
 		Home:            root,

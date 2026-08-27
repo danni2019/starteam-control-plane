@@ -15,6 +15,9 @@ func TestForHomeKeepsRuntimeOutsideWorkspace(t *testing.T) {
 	if got.LaunchAgent != filepath.Join(home, "Library", "LaunchAgents", "com.starteam.runtime.plist") {
 		t.Fatalf("launch agent path = %q", got.LaunchAgent)
 	}
+	if got.StarPulseStaging() != filepath.Join(home, "Library", "Application Support", "starTeam", "starpulse", "staging") {
+		t.Fatalf("starPulse staging path = %q", got.StarPulseStaging())
+	}
 }
 
 func TestCurrentHonorsExplicitRuntimeRoot(t *testing.T) {
