@@ -26,6 +26,10 @@ func (p Paths) StarPulseStaging() string {
 	return filepath.Join(p.ApplicationData, "starpulse", "staging")
 }
 
+func (p Paths) AgentProviders() string {
+	return filepath.Join(p.ConfigHome, "agent-providers.json")
+}
+
 func ForRuntimeRoot(root string) Paths {
 	return Paths{
 		Home:            root,
