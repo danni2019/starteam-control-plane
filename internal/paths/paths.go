@@ -30,6 +30,13 @@ func (p Paths) AgentProviders() string {
 	return filepath.Join(p.ConfigHome, "agent-providers.json")
 }
 
+// StarVoiceSocket is the fixed private socket used by the independently
+// managed starVoice daemon. It is a path contract only; callers never start
+// or supervise the daemon through this helper.
+func (p Paths) StarVoiceSocket() string {
+	return filepath.Join(p.ApplicationData, "starvoice.sock")
+}
+
 func ForRuntimeRoot(root string) Paths {
 	return Paths{
 		Home:            root,
