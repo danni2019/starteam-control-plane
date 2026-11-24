@@ -1,14 +1,26 @@
 # starTeam Control Plane
 
-A small Go control plane for local application components. The gateway checks a primary and standby backend, routes read requests to a ready backend, and exposes a status endpoint. This standalone example combines the original macOS LaunchAgent and runtime-path code with a synthetic two-backend gateway.
+A Go gateway for local application components. It probes a primary and standby backend, forwards read requests to a ready service, and exposes backend readiness through a local status endpoint.
+
+## Watch a failover
+
+From a checkout with Go 1.25 or newer:
 
 ```sh
 go run ./cmd/starteam-control demo
-go test ./...
 ```
 
-The demo starts two temporary loopback services, simulates a primary failure, and prints both routing decisions. To run the gateway against your own two services, use `go run ./cmd/starteam-control --config examples/config.json` and substitute origins that implement `/healthz`. The gateway listens on loopback. Its `/_control/status` endpoint reports readiness. A probe picks the backend for each read request.
+The demo starts two temporary loopback services. The first status reports `active: primary`. After a simulated failure, the second reports `active: standby`. Run `go test ./...` to check routing, failover, and recovery.
 
-On macOS, `write-plist` writes a LaunchAgent into a user-selected runtime directory. Build the binary first, then pass `--root`, an absolute `--binary` path and an absolute `--config` path. The command only renders the plist.
+## Connect your services
 
-The release preserves the related 2026 launchd and path-management commits. The standalone gateway and demo are in the release commit.
+Copy [the example configuration](examples/config.json) and set the two origins to services that implement `/healthz`.
+
+```sh
+go run ./cmd/starteam-control --config examples/config.json
+curl http://127.0.0.1:8765/_control/status
+```
+
+The gateway listens on loopback and checks readiness for each read request. On macOS, build the binary and use `write-plist` with `--root`, an absolute `--binary` path, and an absolute `--config` path to render a LaunchAgent into your runtime directory.
+
+The [MIT-licensed release](LICENSE) preserves the 2026 launchd and runtime-path history. The standalone gateway and its demo were added in the release commit.
