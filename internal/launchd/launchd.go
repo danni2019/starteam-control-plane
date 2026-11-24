@@ -14,7 +14,7 @@ import (
 	"text/template"
 	"time"
 
-	"starteam.local/runtime/internal/paths"
+	"github.com/danni2019/starteam-control-plane/internal/paths"
 )
 
 type CommandRunner interface {
@@ -170,7 +170,7 @@ const plistTemplate = `<?xml version="1.0" encoding="UTF-8"?>
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.starteam.runtime</string>
+  <string>com.starteam.control-plane</string>
   <key>ProgramArguments</key>
   <array>
     <string>{{xml .DaemonPath}}</string>

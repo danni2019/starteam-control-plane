@@ -9,19 +9,19 @@ import (
 func TestForHomeKeepsRuntimeOutsideWorkspace(t *testing.T) {
 	home := filepath.Join(string(filepath.Separator), "Users", "test")
 	got := ForHome(home)
-	if got.Database != filepath.Join(home, "Library", "Application Support", "starTeam", "control.sqlite3") {
+	if got.Database != filepath.Join(home, "Library", "Application Support", "starTeam Control Plane", "control.sqlite3") {
 		t.Fatalf("database path = %q", got.Database)
 	}
-	if got.LaunchAgent != filepath.Join(home, "Library", "LaunchAgents", "com.starteam.runtime.plist") {
+	if got.LaunchAgent != filepath.Join(home, "Library", "LaunchAgents", "com.starteam.control-plane.plist") {
 		t.Fatalf("launch agent path = %q", got.LaunchAgent)
 	}
-	if got.StarPulseStaging() != filepath.Join(home, "Library", "Application Support", "starTeam", "starpulse", "staging") {
+	if got.StarPulseStaging() != filepath.Join(home, "Library", "Application Support", "starTeam Control Plane", "starpulse", "staging") {
 		t.Fatalf("starPulse staging path = %q", got.StarPulseStaging())
 	}
-	if got.AgentProviders() != filepath.Join(home, ".config", "starteam", "agent-providers.json") {
+	if got.AgentProviders() != filepath.Join(home, ".config", "starteam-control-plane", "agent-providers.json") {
 		t.Fatalf("agent provider path = %q", got.AgentProviders())
 	}
-	if got.StarVoiceSocket() != filepath.Join(home, "Library", "Application Support", "starTeam", "starvoice.sock") {
+	if got.StarVoiceSocket() != filepath.Join(home, "Library", "Application Support", "starTeam Control Plane", "starvoice.sock") {
 		t.Fatalf("starVoice socket path = %q", got.StarVoiceSocket())
 	}
 }

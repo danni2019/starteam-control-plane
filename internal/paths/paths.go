@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	LaunchAgentLabel = "com.starteam.runtime"
+	LaunchAgentLabel = "com.starteam.control-plane"
 	DefaultListen    = "127.0.0.1:37640"
 )
 
@@ -53,12 +53,12 @@ func ForRuntimeRoot(root string) Paths {
 func ForHome(home string) Paths {
 	return Paths{
 		Home:            home,
-		ApplicationData: filepath.Join(home, "Library", "Application Support", "starTeam"),
-		Logs:            filepath.Join(home, "Library", "Logs", "starTeam"),
-		ConfigHome:      filepath.Join(home, ".config", "starteam"),
-		UserConfig:      filepath.Join(home, ".config", "starteam", "runtime.json"),
-		Database:        filepath.Join(home, "Library", "Application Support", "starTeam", "control.sqlite3"),
-		State:           filepath.Join(home, "Library", "Application Support", "starTeam", "runtime.json"),
+		ApplicationData: filepath.Join(home, "Library", "Application Support", "starTeam Control Plane"),
+		Logs:            filepath.Join(home, "Library", "Logs", "starTeam Control Plane"),
+		ConfigHome:      filepath.Join(home, ".config", "starteam-control-plane"),
+		UserConfig:      filepath.Join(home, ".config", "starteam-control-plane", "runtime.json"),
+		Database:        filepath.Join(home, "Library", "Application Support", "starTeam Control Plane", "control.sqlite3"),
+		State:           filepath.Join(home, "Library", "Application Support", "starTeam Control Plane", "runtime.json"),
 		LaunchAgent:     filepath.Join(home, "Library", "LaunchAgents", LaunchAgentLabel+".plist"),
 	}
 }

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"starteam.local/runtime/internal/paths"
+	"github.com/danni2019/starteam-control-plane/internal/paths"
 )
 
 type call struct {
